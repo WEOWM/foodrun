@@ -1,10 +1,11 @@
 import { Image, StyleSheet, Text, View, FlatList } from 'react-native';
 import React from 'react';
-import Search from '../components/search/Search';
-import SliceBanner from '../components/banner/SliceBanner';
-import BrandBanner from '../components/banner/Brandbanner/BrandBanner';
-import ProductCard from '../components/card/Productcard/ProductCard';
-import PopularCard from '../components/card/popularcard/PopularCard';
+import Search from '../../components/search/Search';
+import SliceBanner from '../../components/banner/SliceBanner';
+import BrandBanner from '../../components/banner/Brandbanner/BrandBanner';
+import ProductCard from '../../components/card/Productcard/ProductCard';
+import PopularCard from '../../components/card/popularcard/PopularCard';
+
 
 
 const Homescreen = () => {
@@ -21,11 +22,11 @@ const Homescreen = () => {
         }}
       >
         <Image
-          source={require('../assetes/Group3119-31-iPhone13mini-1.png')}
+          source={require('../../assetes/Group3119-31-iPhone13mini-1.png')}
           style={{ width: 15, height: 15 }}
         />
         <View style={{ flexDirection: 'row', gap: 4 }}>
-          <Image source={require('../assetes/Frame-31-iPhone13mini-1.png')} />
+          <Image source={require('../../assetes/Frame-31-iPhone13mini-1.png')} />
           <Text>knenejnenekn</Text>
         </View>
         <View>
@@ -62,6 +63,8 @@ const Homescreen = () => {
       <View style={{ paddingTop: 8 }}>
         <PopularCard />
       </View>
+
+    
       
 
       
