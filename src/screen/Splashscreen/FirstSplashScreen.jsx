@@ -17,10 +17,10 @@ const FirstSplashScreen = ({ navigation }) => {
   
   return (
     <View style={{ flex: 1 , backgroundColor: "white"}}>
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1,  }}>
         <Image
           style={{ width: '100%', bottom: 670 }}
-          source={require('../../assetes/Pattern-1.png')}
+          // source={require('../../assetes/Pattern-1.png')}
         />
       </View>
 

@@ -5,6 +5,10 @@ import SplashStack from './SplashStack';
 import MainTabNavigator from './MainTabNavigator';
 import Homescreen from '../screen/tab/Homescreen';
 import BottomTab from '../components/tabbar/BottomTab';
+import OrderSuccessScreen from '../screen/OrderSuccessScreen';
+import AuthTabs from '../screen/auth/AuthTabs';
+import LoginScreen from '../screen/auth/LoginScreen';
+import SignUpScreen from '../screen/auth/SignUpScreen';
 
 
 
@@ -20,8 +24,10 @@ const AppNavigator = () => {
 
   return (
     <RootStack.Navigator screenOptions={{ headerShown: false }}>
-      {/* <RootStack.Screen name="SplashStack" component={SplashStack} /> */}
+      <RootStack.Screen name="SplashStack" component={SplashStack} />
       <RootStack.Screen name="Home" component={BottomTab} />
+      <RootStack.Screen name="OrderSuccess" component={OrderSuccessScreen} />
+      {/* <RootStack.Screen name="sign" component={SignUpScreen} /> */}
       
       {/* {!splashDone ? (
       ) : (

@@ -1,17 +1,9 @@
 // src/navigation/MainTabNavigator.jsx
 import React from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import BottomTab from '../components/tabbar/BottomTab';
 
-
-
-const Tab = createBottomTabNavigator();
-
-const MainTabNavigator = () => {
-  return (
-    <Tab.Navigator screenOptions={{ headerShown: false }}>
-      <Tab.Screen name="Home" component={BottomTab} />
-    </Tab.Navigator>
-  );
+const MainStack = () => {
+  return <BottomTab />; // Your BottomTab is already a tab navigator
 };
 
-export default MainTabNavigator;
+export default MainStack;

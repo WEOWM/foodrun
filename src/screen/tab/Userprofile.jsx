@@ -1,18 +1,51 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { COLORS } from '../../utils/constants'; // use your COLORS file
 
-const Userprofile = () => {
-  const navigation = useNavigation()
+const UserProfile = () => {
+  const navigation = useNavigation();
+
+  // ✅ State for user info
+  const [user, setUser] = useState({
+    name: '',
+    email: '',
+    photo: '',
+    occupation: 'Manager', // optional default
+    employer: 'Overlay Design', // optional default
+    phone: '+4574621587', // optional default
+  });
+
+  // ✅ Fetch user data from AsyncStorage
+  useEffect(() => {
+    const getUserData = async () => {
+      const name = await AsyncStorage.getItem('userName');
+      const email = await AsyncStorage.getItem('userEmail');
+      const photo = await AsyncStorage.getItem('userPhoto');
+
+      setUser({
+        ...user,
+        name: name || 'Basim Shareef',
+        email: email || 'basims@gmail.com',
+        photo: photo || 'https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000',
+      });
+    };
+    getUserData();
+  }, []);
+
   return (
-    <View style={styles.container} >
+    <View style={styles.container}>
       {/* Header */}
-      <View  style={styles.header} >
-        <TouchableOpacity  style={styles.iconBox} onPress={()=> navigation.replace("Home")}>
+      <View style={styles.header}>
+        <TouchableOpacity
+          style={styles.iconBox}
+          onPress={() => navigation.navigate('Homescreen')}
+        >
           <AntDesign name="arrowleft" size={20} color="#fff" />
-        </TouchableOpacity >
+        </TouchableOpacity>
         <View style={styles.iconBox}>
           <Ionicons name="notifications" size={20} color="#fff" />
         </View>
@@ -20,35 +53,30 @@ const Userprofile = () => {
 
       {/* Profile */}
       <View style={styles.profileSection}>
-        <Image
-          source={{
-            uri: 'https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000',
-          }}
-          style={styles.avatar}
-        />
-        <Text style={styles.username}>Basim Shareef</Text>
-        <Text style={styles.subtitle}>Manager • Overlay Design</Text>
+        <Image source={{ uri: user.photo }} style={styles.avatar} />
+        <Text style={styles.username}>{user.name}</Text>
+        <Text style={styles.subtitle}>{user.occupation} • {user.employer}</Text>
       </View>
 
       {/* Personal Info */}
       <Text style={styles.sectionTitle}>Personal Info</Text>
       <View style={styles.card}>
-        <Text style={styles.infoText}>Your Name: Basim Shareef</Text>
-        <Text style={styles.infoText}>Occupation: Manager</Text>
-        <Text style={styles.infoText}>Employer: Overlay Design</Text>
+        <Text style={styles.infoText}>Your Name: {user.name}</Text>
+        <Text style={styles.infoText}>Occupation: {user.occupation}</Text>
+        <Text style={styles.infoText}>Employer: {user.employer}</Text>
       </View>
 
       {/* Contact Info */}
       <Text style={styles.sectionTitle}>Contact Info</Text>
       <View style={styles.card}>
-        <Text style={styles.infoText}>📞 Phone: +4574621587</Text>
-        <Text style={styles.infoText}>📧 Email: basims@gmail.com</Text>
+        <Text style={styles.infoText}>📞 Phone: {user.phone}</Text>
+        <Text style={styles.infoText}>📧 Email: {user.email}</Text>
       </View>
     </View>
   );
 };
 
-export default Userprofile;
+export default UserProfile;
 
 const styles = StyleSheet.create({
   container: {
@@ -64,7 +92,7 @@ const styles = StyleSheet.create({
   iconBox: {
     width: 40,
     height: 40,
-    backgroundColor: '#FF3B30',
+    backgroundColor: COLORS.danger,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,
@@ -83,7 +111,7 @@ const styles = StyleSheet.create({
     height: 100,
     borderRadius: 50,
     borderWidth: 3,
-    borderColor: '#FF3B30',
+    borderColor: COLORS.danger,
   },
   username: {
     marginTop: 12,
