@@ -6,18 +6,19 @@ import Userprofile from '../../screen/tab/Userprofile';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import CartScreen from '../../screen/CartScreen';
 import { useSelector } from 'react-redux';
+import ChatBotScreen from '../../screen/tab/ChatBotScreen';
 
 const Tab = createBottomTabNavigator();
 
 const BottomTab = () => {
-  const cartCount = useSelector((state) => state.cart.items.length); // ✅ cart items count
+  const cartCount = useSelector((state) => state.cart.items.length);
 
   const TabArr = [
-  { route: 'Hometab', component: Homescreen, label: 'Home', icon: 'home' },
-  { route: 'Profile', component: Userprofile, label: 'Profile', icon: 'user' },
-  { route: 'Cart', component: CartScreen, label: 'Cart', icon: 'shoppingcart', badge: cartCount },
-  { route: 'Message', component: Userprofile, label: 'Message', icon: 'message1' },
-];
+    { route: 'Hometab', component: Homescreen, label: 'Home', icon: 'home' },
+    { route: 'Profile', component: Userprofile, label: 'Profile', icon: 'user' },
+    { route: 'Cart', component: CartScreen, label: 'Cart', icon: 'shoppingcart', badge: cartCount },
+    { route: 'Chat', component: ChatBotScreen, label: 'Message', icon: 'message1' },
+  ];
 
   return (
     <Tab.Navigator
@@ -36,16 +37,13 @@ const BottomTab = () => {
           options={{
             tabBarIcon: ({ color, size }) => (
               <View>
-                <AntDesign
-                  name={item.icon}
-                  size={size}
-                  color={color}
-                  style={{ top: 10 }}
-                />
-                {/* ✅ Show badge only if cart has items */}
+                <AntDesign name={item.icon} size={size} color={color} />
+                {/* Show badge only if cart has items */}
                 {item.route === 'Cart' && cartCount > 0 && (
                   <View style={styles.badge}>
-                    <Text style={styles.badgeText}>{cartCount}</Text>
+                    <Text style={styles.badgeText}>
+                      {cartCount > 9 ? '9+' : cartCount}
+                    </Text>
                   </View>
                 )}
               </View>
@@ -62,11 +60,11 @@ export default BottomTab;
 const styles = StyleSheet.create({
   badge: {
     position: 'absolute',
-    right: -10,
-    top: 2,
+    right: -8,
+    top: -4,
     backgroundColor: 'red',
     borderRadius: 10,
-    paddingHorizontal: 5,
+    paddingHorizontal: 4,
     minWidth: 18,
     height: 18,
     justifyContent: 'center',

@@ -27,7 +27,7 @@ const Homescreen = () => {
         />
         <View style={{ flexDirection: 'row', gap: 4 }}>
           <Image source={require('../../assetes/Frame-31-iPhone13mini-1.png')} />
-          <Text>knenejnenekn</Text>
+          <Text>kerala</Text>
         </View>
         <View>
           <Image
